@@ -27,7 +27,7 @@ class Comms:
                     if i not in Gnx:
                          continue
                     empty = False
-                    f.write(str(i) + ' ')
+                    f.write(str(i+1) + ' ')
                  if not empty:                 
                      f.write('\n')
                      
@@ -121,7 +121,7 @@ class Graph:
                      first = False
                  else:
                      f.write('\n')     
-                 f.write(str(i) + deli +str(j))
+                 f.write(str(i+1) + deli +str(j+1))
 
  
 def Q(G, C):
@@ -451,7 +451,9 @@ def write_to_file(G,C,path, name,format,params, is_nx=False):
         if not params['directed']: Gnx = Gnx.to_undirected()
         nx.write_gml(Gnx, path+'/'+name+'.gml')
     elif format == 'list1':
-        nx.write_edgelist(Gnx, path+'/'+name+'.dat', data=False, delimiter=' ') 
+#        nx.write_edgelist(Gnx, path+'/'+name+'.dat', data=False, delimiter=' ') 
+	G.write_edgelist(path+'/'+name+'.dat', deli='\t') 
+	nx.write_gml(Gnx, path+'/'+name+'.gml')
         C.write_groups( path+'/'+name+'.lgt', Gnx)
     elif format == 'list2': 
         nx.write_edgelist(Gnx, path+'/'+name, data=False, delimiter=' ')
